@@ -94,7 +94,7 @@
 <div class="toast" id="toast"></div>
 
 <script type="module">
-import { CASAS } from "./casas.js";
+const { CASAS } = await import("./casas.js?t=" + Date.now());
 import { firebaseConfig } from "./firebase-config.js";
 
 const GROUP = 4;
