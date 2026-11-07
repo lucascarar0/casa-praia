@@ -164,7 +164,7 @@ function render(){
   const max = Math.max(0, ...CASAS.map(c => (t[c.id] || []).length));
   const leaders = CASAS.filter(c => max > 0 && (t[c.id] || []).length === max).length;
   const preco = c => { const n = parseInt(String(c.valor).replace(/\D/g, ""), 10); return isNaN(n) ? Infinity : n; };
-  const sorted = [...CASAS].sort((a, b) => preco(a) - preco(b));
+  const sorted = [...CASAS].sort((a, b) => preco(b) - preco(a));
 
   const grid = $("#grid"); grid.textContent = "";
   for (const c of sorted){
