@@ -268,5 +268,52 @@ export const CASAS = [
       "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/7f87a9f0-04df-4bb9-b4ef-387cb6777b35.jpeg",
       "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/545ecddb-a60e-48ee-8697-69e4924acf72.jpeg"
     ]
+  },
+  {
+    id: "1198623327406535777",
+    coords: [-27.4295, -48.3975], // localização aproximada (Airbnb)
+    titulo: "Gaivotas Apart 2 quartos",
+    local: "Praia dos Ingleses, Florianópolis, SC",
+    valor: "R$ 4.347",
+    estadia: "3 noites · 31/12 a 03/01",
+    link: "https://www.airbnb.com.br/rooms/1198623327406535777?check_in=2026-12-31&check_out=2027-01-03&guests=4&adults=4",
+    fotos: [
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/a9a4ee66-cb52-4114-a6b3-3e0bb9ea4913.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyMzMyNzQwNjUzNTc3Nw%3D%3D/original/f339f15f-1179-4006-a035-6cf9dd36001c.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyMzMyNzQwNjUzNTc3Nw%3D%3D/original/1c6c5a2a-9bd4-4d50-ab6b-5f907b4c38c9.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/4bc24e95-aa01-4cea-bc51-e02e00a65dfe.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/24d39c7e-89e9-411b-8899-6fe3af1ed5fd.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/f6eef72d-51ae-48d9-ae4e-2eec4f09ead9.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/0b7f331e-2871-4cb4-a34b-ad6066a67310.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/7eacd874-875b-4249-85a1-c0f1dd323d7b.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/5d5a93be-0eb7-44ef-ae28-1b3bd5654baf.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyMzMyNzQwNjUzNTc3Nw%3D%3D/original/99fb4697-11ec-476e-943e-263753d55ed9.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/0880da17-0353-4376-a48a-2a4fb48cdc68.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyMzMyNzQwNjUzNTc3Nw%3D%3D/original/24396c61-3564-4cad-b58a-21ce1bff0fc8.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/ee064ba3-7d97-4d0c-a770-f013e3054dd6.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/1d10d598-4bef-48b5-9d08-36716b53bece.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyMzMyNzQwNjUzNTc3Nw%3D%3D/original/429f422c-180b-493a-9d28-089bd808f309.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/325c2dc3-4f89-4785-ab0c-d95e6f6b1f49.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/0184cf1f-36fb-423b-ab11-20e9eeb6d236.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/eda62619-16b9-4023-bf51-1a8088c98aeb.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/682c8d74-d4e7-40fb-aaef-62bc7611b53a.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/dd319b26-6e69-4a1b-b88c-80505ff3d37d.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/228c168e-80c3-41e9-872e-66806f76747f.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/537598c1-6e47-43b7-8278-94de132552f2.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/351b3b35-2f1e-47e9-bb61-939bbdebf41b.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyMzMyNzQwNjUzNTc3Nw%3D%3D/original/792fee78-305d-4488-8027-e712edfba7f4.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyMzMyNzQwNjUzNTc3Nw%3D%3D/original/3ea3e7ec-8d45-4b42-86fc-be3d20152f4a.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/1a95587e-ae7f-4077-afc3-cc6b1ee515cb.jpeg",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-1198623327406535777/original/315fee53-e798-44eb-ba78-d5b1e8653044.png",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyMzMyNzQwNjUzNTc3Nw%3D%3D/original/ff9b1099-eb86-4db8-8411-97dc4d0c0274.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/b40a6a74-6261-4da8-ad37-a7a01d139059.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/239e012a-837c-4d52-b24f-b1c9102bb75e.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/9614a472-c651-4c80-8042-a9ce57057526.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyMzMyNzQwNjUzNTc3Nw%3D%3D/original/650992e6-60f1-4d19-a20b-ff545681020d.jpeg",
+      "https://a0.muscache.com/im/pictures/miso/Hosting-1198623327406535777/original/956fd3eb-4c63-4c0c-a145-42005426b84f.png",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyMzMyNzQwNjUzNTc3Nw%3D%3D/original/2c89d82b-1fdb-4c21-bbd8-3ab6dfe275bc.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTE5ODYyMzMyNzQwNjUzNTc3Nw%3D%3D/original/0ade6aa5-595f-450a-af55-8ab083d42947.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1198623327406535777/original/055672ca-d44d-4e93-906a-1fc9d59a2299.jpeg"
+    ]
   }
 ];
