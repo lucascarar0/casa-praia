@@ -233,5 +233,40 @@ export const CASAS = [
       "https://a0.muscache.com/im/pictures/hosting/Hosting-1429881020200666227/original/85191518-434c-41aa-b57c-b4e4ba3cf537.jpeg",
       "https://a0.muscache.com/im/pictures/hosting/Hosting-1429881020200666227/original/27e2fbe3-8f3e-403a-8277-3358b954fb8b.jpeg"
     ]
+  },
+  {
+    id: "1491389573023569875",
+    coords: [-27.4267, -48.4454], // localização aproximada (Airbnb)
+    titulo: "Apartamento na praia, Florianópolis",
+    local: "Cachoeira do Bom Jesus, Florianópolis, SC",
+    valor: "R$ 3.752",
+    estadia: "3 noites · 31/12 a 03/01",
+    link: "https://www.airbnb.com.br/rooms/1491389573023569875?check_in=2026-12-31&check_out=2027-01-03&guests=4&adults=4",
+    fotos: [
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/8eb082e3-f72b-42b1-a04a-1f2f48434877.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/7f4ce9e6-8767-4685-bf59-f4b09bf51c55.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/b69cb315-4843-4493-90af-0e374d965872.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/acb967e8-3521-4920-b985-6be80b0b635e.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/a92bde7d-eb81-4fb9-8bda-d7643bad6483.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/a20030e0-8855-49e1-b2a6-a9e12d3f2dbd.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/ef53b73c-762e-4727-a140-2ff0f12291e0.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/a39a202d-2887-45a8-8570-63f41af66fab.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/796436a7-5b03-42e8-93a4-841ff16f0982.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/ad8fe8a2-78e4-4c0a-8acc-3087b11e6fbd.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/20682355-6b90-4656-944b-95d7135f7d1a.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/df499697-91f9-46ea-abb7-cd41852be284.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/7f3fc65a-54dd-4c98-9868-70d84dc614be.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/318e447f-d569-41f5-b138-baa26dc6943d.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/104f5f47-d1dc-4190-b281-41312d33b4e7.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/a4fd04c6-2f7c-43a8-9da5-c4e08a0def70.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/ee01fcbc-3aad-4742-99b9-c562898ee498.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/1127bc6f-d402-4a87-a762-c943e3c58879.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/013a9fa6-0b3e-418a-a8fd-c9f03ac5178a.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-1491389573023569875/original/d51b952f-79f9-400d-82f4-ca6bdc4174a4.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/6a1677c6-eb5d-4ab5-af4d-b16a2c2d4140.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/7c81c984-ba39-4ddf-ba7c-8a269217fc74.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/7f87a9f0-04df-4bb9-b4ef-387cb6777b35.jpeg",
+      "https://a0.muscache.com/im/pictures/hosting/Hosting-U3RheVN1cHBseUxpc3Rpbmc6MTQ5MTM4OTU3MzAyMzU2OTg3NQ==/original/545ecddb-a60e-48ee-8697-69e4924acf72.jpeg"
+    ]
   }
 ];
