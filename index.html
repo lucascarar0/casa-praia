@@ -48,6 +48,7 @@
   .loc{color:var(--muted);font-size:14px}
   .price{font-size:18px;font-weight:600;color:var(--sea-d);margin-top:4px}
   .price small{font-size:13px;font-weight:500;color:var(--muted)}
+  .aviso{font-size:13px;color:#7a4b00;background:#fff4dc;border-radius:8px;padding:6px 10px}
   .link{font-size:13px;color:var(--sea);text-decoration:none;font-weight:500}
   .link:hover{text-decoration:underline}
   .votes{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
@@ -186,7 +187,8 @@ function render(){
 
     const body = el("div", "body");
     body.append(el("h3", null, c.titulo), el("div", "loc", "📍 " + c.local));
-    const pr = el("div", "price", c.valor + " "); pr.append(el("small", null, "total · " + c.estadia)); body.append(pr);
+    const pr = el("div", "price", c.valor + " "); pr.append(el("small", null, (c.valor.startsWith("R$") ? "total · " : "") + c.estadia)); body.append(pr);
+    if (c.aviso) body.append(el("div", "aviso", "⚠️ " + c.aviso));
     const links = el("div", "links");
     const a = el("a", "link", "Ver no Airbnb ↗"); a.href = c.link; a.target = "_blank"; a.rel = "noopener"; links.append(a);
     if (c.coords && map){ const ml = el("button", "maplink", "📍 Ver no mapa"); ml.onclick = () => focusMap(c.id); links.append(ml); }
@@ -227,7 +229,7 @@ function initMap(){
   }
   map.fitBounds(L.latLngBounds(comCoords.map(c => c.coords)), { padding: [40, 40] });
 }
-function pinIcon(c, cls){ return L.divIcon({ className: "", html: `<span class="pin ${cls}">${c.valor.replace("R$ ", "R$")}</span>`, iconSize: null }); }
+function pinIcon(c, cls){ return L.divIcon({ className: "", html: `<span class="pin ${cls}">${c.valor.startsWith("R$") ? c.valor.replace("R$ ", "R$") : "?"}</span>`, iconSize: null }); }
 function updatePins(t, max, myVote){
   if (!map) return;
   for (const c of CASAS){
