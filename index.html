@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa na praia — votação</title>
+<meta property="og:title" content="Casa na praia — vote na sua favorita">
+<meta property="og:description" content="Veja as opções e vote na casa que você mais gostou.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏖️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{--sand:#f6efe3;--sand2:#efe4d1;--ink:#1d2a33;--muted:#5d6b73;--sea:#0e7c86;--sea-d:#0a5f67;--coral:#e8735a;--card:#fffdf9;--line:#e3d7c3}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Inter,system-ui,sans-serif;background:var(--sand);color:var(--ink);-webkit-font-smoothing:antialiased}
+  header{background:linear-gradient(180deg,#0e7c86 0%,#1592a0 70%,var(--sand) 100%);color:#fff;padding:36px 20px 70px;text-align:center}
+  header h1{font-family:Fraunces,serif;font-size:clamp(28px,6vw,44px);margin:0 0 6px;letter-spacing:-.5px}
+  header p{margin:0;opacity:.92;font-size:15px}
+  main{max-width:1080px;margin:-44px auto 60px;padding:0 16px}
+  .bar{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;box-shadow:0 6px 20px rgba(29,42,51,.06)}
+  .bar .info{font-size:14px;color:var(--muted)}
+  .bar .info b{color:var(--ink)}
+  .dots{display:inline-flex;gap:4px;vertical-align:middle;margin-left:6px}
+  .dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+  .dots i.on{background:var(--sea)}
+  .me{font-size:14px;color:var(--muted)}
+  .me button{background:none;border:0;color:var(--sea);font:600 14px Inter;cursor:pointer;padding:0;text-decoration:underline}
+  .btn{font:600 14px Inter,sans-serif;border:0;border-radius:10px;padding:10px 16px;cursor:pointer;background:var(--sea);color:#fff;transition:background .15s}
+  .btn:hover{background:var(--sea-d)}
+  .btn.ghost{background:transparent;color:var(--sea);border:1.5px solid var(--sea)}
+  .btn.ghost:hover{background:rgba(14,124,134,.08)}
+  .btn:disabled{opacity:.5;cursor:default}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:20px;margin-top:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;position:relative}
+  .card.mine{border-color:var(--sea);box-shadow:0 0 0 2px var(--sea)}
+  .badge{position:absolute;top:12px;left:12px;z-index:2;background:var(--coral);color:#fff;font:600 12px Inter;padding:5px 10px;border-radius:20px}
+  .gallery{position:relative;aspect-ratio:4/3;background:var(--sand2)}
+  .slides{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;height:100%;scrollbar-width:none}
+  .slides::-webkit-scrollbar{display:none}
+  .slides img{flex:0 0 100%;width:100%;height:100%;object-fit:cover;scroll-snap-align:start}
+  .nav{position:absolute;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:50%;border:0;background:rgba(255,255,255,.9);cursor:pointer;font-size:18px;line-height:1;color:var(--ink);box-shadow:0 2px 6px rgba(0,0,0,.15)}
+  .nav.prev{left:8px}.nav.next{right:8px}
+  .count{position:absolute;bottom:8px;right:10px;background:rgba(0,0,0,.55);color:#fff;font-size:11px;padding:3px 8px;border-radius:10px}
+  .body{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
+  .body h3{margin:0 0 2px;font-family:Fraunces,serif;font-size:19px;line-height:1.25}
+  .loc{color:var(--muted);font-size:14px}
+  .price{font-size:18px;font-weight:600;color:var(--sea-d);margin-top:4px}
+  .price small{font-size:13px;font-weight:500;color:var(--muted)}
+  .link{font-size:13px;color:var(--sea);text-decoration:none;font-weight:500}
+  .link:hover{text-decoration:underline}
+  .votes{margin-top:auto;padding-top:12px;border-top:1px dashed var(--line);display:flex;align-items:center;justify-content:space-between;gap:10px}
+  .who{font-size:13px;color:var(--muted)}
+  .who b{color:var(--ink);font-size:15px}
+  .chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+  .chip{background:var(--sand2);color:var(--ink);font-size:12px;padding:2px 8px;border-radius:10px}
+  .warn{margin-top:14px;font-size:13px;color:#7a4b00;background:#fff4dc;border:1px solid #f0d9a6;border-radius:10px;padding:10px 14px}
+  .modal{position:fixed;inset:0;background:rgba(20,30,36,.5);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+  .modal.open{display:flex}
+  .sheet{background:var(--card);border-radius:16px;padding:22px;width:100%;max-width:380px}
+  .sheet h2{font-family:Fraunces,serif;margin:0 0 6px}
+  .sheet p{margin:0 0 14px;color:var(--muted);font-size:14px}
+  input[type=text]{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:16px Inter;background:#fff}
+  input:focus{outline:2px solid var(--sea);border-color:transparent}
+  .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20}
+  .toast.show{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <h1>🏖️ Casa na praia</h1>
+  <p>Veja as opções e vote na sua favorita. Dá para trocar o voto quando quiser.</p>
+</header>
+<main>
+  <div class="bar">
+    <div class="info" id="info">Carregando…</div>
+    <div class="me" id="me"></div>
+  </div>
+  <div id="warn"></div>
+  <div class="grid" id="grid"></div>
+</main>
+
+<div class="modal" id="modal">
+  <form class="sheet" id="nameForm">
+    <h2>Quem é você?</h2>
+    <p>Seu nome aparece junto do seu voto, para o grupo saber quem votou em qual.</p>
+    <input type="text" id="nameInput" maxlength="30" placeholder="Seu nome" autocomplete="given-name" required>
+    <div class="actions">
+      <button type="button" class="btn ghost" id="nameCancel">Cancelar</button>
+      <button type="submit" class="btn">Continuar</button>
+    </div>
+  </form>
+</div>
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { CASAS } from "./casas.js";
+import { firebaseConfig } from "./firebase-config.js";
+
+const GROUP = 4;
+const $ = s => document.querySelector(s);
+let votos = {};            // id -> {nome, casa, em}
+let fb = null;             // {db, doc, setDoc, deleteDoc}
+let ready = false;
+let pendingVote = null;
+let meuNome = null;
+try { meuNome = localStorage.getItem("casa-praia-nome"); } catch(e) {}
+
+const slug = n => n.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,40) || "anonimo";
+const el = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; };
+function toast(m){ const t=$("#toast"); t.textContent=m; t.classList.add("show"); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove("show"),2600); }
+const foto = u => u + (u.includes("?") ? "&" : "?") + "im_w=960";
+
+function renderMe(){
+  const me = $("#me"); me.textContent = "";
+  if (!fb) return;
+  if (meuNome){
+    me.append(document.createTextNode("Votando como "), el("b", null, meuNome), document.createTextNode(" · "));
+    const b = el("button", null, "trocar"); b.onclick = () => askName(null); me.append(b);
+  }
+}
+
+function render(){
+  const valid = new Set(CASAS.map(c => c.id));
+  const t = {};
+  Object.values(votos).forEach(v => { if (v && valid.has(v.casa)) (t[v.casa] ||= []).push(v.nome); });
+  const total = Object.values(votos).filter(v => v && valid.has(v.casa)).length;
+  const myVote = meuNome && votos[slug(meuNome)] ? votos[slug(meuNome)].casa : null;
+
+  const info = $("#info"); info.textContent = "";
+  if (!fb) info.textContent = `${CASAS.length} opções`;
+  else if (!ready) info.textContent = "Carregando votos…";
+  else {
+    info.append(el("b", null, `${Math.min(total, GROUP)} de ${GROUP}`), document.createTextNode(" já votaram"));
+    const d = el("span", "dots"); for (let i = 0; i < GROUP; i++) d.append(el("i", i < total ? "on" : "")); info.append(d);
+  }
+
+  const max = Math.max(0, ...CASAS.map(c => (t[c.id] || []).length));
+  const leaders = CASAS.filter(c => max > 0 && (t[c.id] || []).length === max).length;
+  const sorted = [...CASAS].map((c, i) => ({c, i})).sort((a, b) => ((t[b.c.id]||[]).length - (t[a.c.id]||[]).length) || a.i - b.i).map(x => x.c);
+
+  const grid = $("#grid"); grid.textContent = "";
+  for (const c of sorted){
+    const voters = t[c.id] || [];
+    const card = el("article", "card" + (myVote === c.id ? " mine" : ""));
+    if (max > 0 && voters.length === max) card.append(el("span", "badge", leaders > 1 ? "Empatada na frente" : "🏆 Mais votada"));
+
+    const g = el("div", "gallery"), s = el("div", "slides");
+    c.fotos.forEach((f, i) => { const im = new Image(); im.src = foto(f); im.alt = `${c.titulo} — foto ${i+1}`; im.loading = "lazy"; im.referrerPolicy = "no-referrer"; s.append(im); });
+    g.append(s);
+    if (c.fotos.length > 1){
+      const cnt = el("span", "count", `1 / ${c.fotos.length}`);
+      const go = dir => s.scrollBy({left: dir * s.clientWidth, behavior: "smooth"});
+      const p = el("button", "nav prev", "‹"); p.setAttribute("aria-label", "Foto anterior"); p.onclick = () => go(-1);
+      const n = el("button", "nav next", "›"); n.setAttribute("aria-label", "Próxima foto"); n.onclick = () => go(1);
+      s.addEventListener("scroll", () => { cnt.textContent = `${Math.round(s.scrollLeft / s.clientWidth) + 1} / ${c.fotos.length}`; }, {passive: true});
+      g.append(p, n, cnt);
+    }
+    card.append(g);
+
+    const body = el("div", "body");
+    body.append(el("h3", null, c.titulo), el("div", "loc", "📍 " + c.local));
+    const pr = el("div", "price", c.valor + " "); pr.append(el("small", null, "total · " + c.estadia)); body.append(pr);
+    const a = el("a", "link", "Ver no Airbnb ↗"); a.href = c.link; a.target = "_blank"; a.rel = "noopener"; body.append(a);
+
+    if (fb){
+      const v = el("div", "votes"), who = el("div", "who");
+      who.append(el("b", null, String(voters.length)), document.createTextNode(voters.length === 1 ? " voto" : " votos"));
+      if (voters.length){ const ch = el("div", "chips"); voters.forEach(nm => ch.append(el("span", "chip", nm))); who.append(ch); }
+      v.append(who);
+      const mine = myVote === c.id;
+      const b = el("button", mine ? "btn ghost" : "btn", mine ? "Tirar voto" : (myVote ? "Mudar para esta" : "Votar nesta"));
+      b.disabled = !ready;
+      b.onclick = () => vote(mine ? null : c.id, b);
+      v.append(b); body.append(v);
+    }
+    card.append(body); grid.append(card);
+  }
+}
+
+function askName(then){
+  pendingVote = then;
+  $("#nameInput").value = meuNome || "";
+  $("#modal").classList.add("open");
+  setTimeout(() => $("#nameInput").focus(), 50);
+}
+$("#nameCancel").onclick = () => $("#modal").classList.remove("open");
+$("#modal").addEventListener("click", e => { if (e.target.id === "modal") $("#modal").classList.remove("open"); });
+$("#nameForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const nome = $("#nameInput").value.trim().replace(/\s+/g, " ").slice(0, 30);
+  if (!nome) return;
+  const antigo = meuNome;
+  meuNome = nome;
+  try { localStorage.setItem("casa-praia-nome", nome); } catch(err) {}
+  $("#modal").classList.remove("open");
+  // trocou de nome: leva o voto antigo junto
+  if (antigo && slug(antigo) !== slug(nome) && votos[slug(antigo)] && !pendingVote){
+    const casa = votos[slug(antigo)].casa;
+    try { await fb.deleteDoc(fb.doc(fb.db, "votos", slug(antigo))); await saveVote(casa); } catch(err) {}
+  }
+  renderMe(); render();
+  if (pendingVote){ const p = pendingVote; pendingVote = null; await p(); }
+});
+
+async function saveVote(casa){
+  const ref = fb.doc(fb.db, "votos", slug(meuNome));
+  if (casa) await fb.setDoc(ref, { nome: meuNome, casa, em: Date.now() });
+  else await fb.deleteDoc(ref);
+}
+
+async function vote(casa, btn){
+  if (!meuNome) return askName(() => vote(casa, btn));
+  btn.disabled = true;
+  try { await saveVote(casa); toast(casa ? "Voto registrado!" : "Voto removido"); }
+  catch(e){ toast("Não deu para salvar o voto. Tente de novo."); }
+  finally { btn.disabled = false; }
+}
+
+render();
+
+if (!firebaseConfig){
+  $("#warn").append(el("div", "warn", "A votação ainda não foi ligada (falta configurar o Firebase). As casas já podem ser vistas."));
+} else {
+  try {
+    const app = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+    const fs = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+    const db = fs.getFirestore(app.initializeApp(firebaseConfig));
+    fb = { db, doc: fs.doc, setDoc: fs.setDoc, deleteDoc: fs.deleteDoc };
+    renderMe(); render();
+    fs.onSnapshot(fs.collection(db, "votos"), snap => {
+      votos = {}; snap.forEach(d => { votos[d.id] = d.data(); });
+      ready = true; render();
+    }, err => {
+      $("#warn").textContent = ""; $("#warn").append(el("div", "warn", "Não foi possível carregar os votos agora. Recarregue a página em instantes."));
+    });
+  } catch(e){
+    $("#warn").append(el("div", "warn", "Não foi possível conectar à votação. Recarregue a página."));
+  }
+}
+</script>
+</body>
+</html>
