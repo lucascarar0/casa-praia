@@ -2,6 +2,7 @@
 export const CASAS = [
   {
     id: "654990516330559460",
+    coords: [-27.3275, -48.5398], // localização aproximada (Airbnb)
     titulo: "Apartamento Praia de Palmas próximo do mar",
     local: "Praia de Palmas, Governador Celso Ramos, SC",
     valor: "R$ 4.290",
@@ -44,6 +45,7 @@ export const CASAS = [
   },
   {
     id: "1805898232780980761",
+    coords: [-27.42398, -48.43545], // localização aproximada (Airbnb)
     titulo: "Casa na Cachoeira do Bom Jesus, perto da praia",
     local: "Cachoeira do Bom Jesus, Florianópolis, SC",
     valor: "R$ 3.450",
@@ -71,6 +73,7 @@ export const CASAS = [
   },
   {
     id: "1320336989520610057",
+    coords: [-27.3332, -48.5367], // localização aproximada (Airbnb)
     titulo: "Apto decorado 2 dorms",
     local: "Governador Celso Ramos, SC",
     valor: "R$ 4.144",
@@ -154,6 +157,7 @@ export const CASAS = [
   },
   {
     id: "1811555901929680697",
+    coords: [-27.3317, -48.5374], // localização aproximada (Airbnb)
     titulo: "Apartamento novinho próximo à praia",
     local: "Governador Celso Ramos, SC",
     valor: "R$ 3.540",
@@ -175,6 +179,7 @@ export const CASAS = [
   },
   {
     id: "1165245609366511944",
+    coords: [-26.76025, -53.1737], // localização aproximada (Airbnb)
     titulo: "Chalé Belo Horizonte",
     local: "Maravilha, SC",
     valor: "R$ 1.528",
@@ -212,6 +217,7 @@ export const CASAS = [
   },
   {
     id: "1429881020200666227",
+    coords: [-26.7916, -52.4995], // localização aproximada (Airbnb)
     titulo: "Cabana Cafofo",
     local: "Xanxerê, SC",
     valor: "R$ 1.195",

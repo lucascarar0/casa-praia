@@ -9,6 +9,8 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏖️</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
 <style>
   :root{--sand:#f6efe3;--sand2:#efe4d1;--ink:#1d2a33;--muted:#5d6b73;--sea:#0e7c86;--sea-d:#0a5f67;--coral:#e8735a;--card:#fffdf9;--line:#e3d7c3}
   *{box-sizing:border-box}
@@ -62,6 +64,24 @@
   input[type=text]{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;font:16px Inter;background:#fff}
   input:focus{outline:2px solid var(--sea);border-color:transparent}
   .actions{display:flex;gap:10px;justify-content:flex-end;margin-top:16px}
+  .mapbox{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+  .mapbox h2{font-family:Fraunces,serif;font-size:20px;margin:0;padding:14px 18px 4px}
+  .mapbox p{margin:0;padding:0 18px 12px;font-size:13px;color:var(--muted)}
+  #map{height:380px;background:var(--sand2)}
+  .pin{background:var(--card);color:var(--ink);border:2px solid var(--sea);border-radius:20px;padding:3px 9px;font:600 12px Inter,sans-serif;white-space:nowrap;box-shadow:0 2px 6px rgba(0,0,0,.25);transform:translate(-50%,-50%);display:inline-block}
+  .pin.mine{background:var(--sea);color:#fff}
+  .pin.lead{border-color:var(--coral)}
+  .leaflet-div-icon{background:none;border:0}
+  .pop{font-family:Inter,sans-serif;min-width:170px}
+  .pop img{width:100%;height:96px;object-fit:cover;border-radius:8px;margin-bottom:6px}
+  .pop b{display:block;font-size:13px;margin-bottom:2px}
+  .pop span{color:var(--muted);font-size:12px}
+  .pop button{margin-top:8px;width:100%;font:600 12px Inter;border:0;border-radius:8px;padding:7px;background:var(--sea);color:#fff;cursor:pointer}
+  .maplink{background:none;border:0;padding:0;color:var(--sea);font:500 13px Inter;cursor:pointer;text-align:left}
+  .maplink:hover{text-decoration:underline}
+  .links{display:flex;gap:14px;flex-wrap:wrap}
+  .card.flash{animation:flash 1.4s ease}
+  @keyframes flash{0%,100%{box-shadow:none}30%{box-shadow:0 0 0 4px var(--coral)}}
   .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:20}
   .toast.show{opacity:1}
 </style>
@@ -77,6 +97,11 @@
     <div class="me" id="me"></div>
   </div>
   <div id="warn"></div>
+  <section class="mapbox" id="mapa">
+    <h2>🗺️ Onde fica cada uma</h2>
+    <p>Localização aproximada, como o Airbnb mostra antes da reserva. Toque num preço para ver a casa.</p>
+    <div id="map"></div>
+  </section>
   <div class="grid" id="grid"></div>
 </main>
 
@@ -143,6 +168,7 @@ function render(){
   for (const c of sorted){
     const voters = t[c.id] || [];
     const card = el("article", "card" + (myVote === c.id ? " mine" : ""));
+    card.id = "casa-" + c.id;
     if (max > 0 && voters.length === max) card.append(el("span", "badge", leaders > 1 ? "Empatada na frente" : "🏆 Mais votada"));
 
     const g = el("div", "gallery"), s = el("div", "slides");
@@ -161,7 +187,10 @@ function render(){
     const body = el("div", "body");
     body.append(el("h3", null, c.titulo), el("div", "loc", "📍 " + c.local));
     const pr = el("div", "price", c.valor + " "); pr.append(el("small", null, "total · " + c.estadia)); body.append(pr);
-    const a = el("a", "link", "Ver no Airbnb ↗"); a.href = c.link; a.target = "_blank"; a.rel = "noopener"; body.append(a);
+    const links = el("div", "links");
+    const a = el("a", "link", "Ver no Airbnb ↗"); a.href = c.link; a.target = "_blank"; a.rel = "noopener"; links.append(a);
+    if (c.coords && map){ const ml = el("button", "maplink", "📍 Ver no mapa"); ml.onclick = () => focusMap(c.id); links.append(ml); }
+    body.append(links);
 
     if (fb){
       const v = el("div", "votes"), who = el("div", "who");
@@ -176,6 +205,47 @@ function render(){
     }
     card.append(body); grid.append(card);
   }
+  updatePins(t, max, myVote);
+}
+
+// ---- mapa ----
+let map = null; const pins = {};
+function initMap(){
+  if (typeof L === "undefined") { $("#mapa").hidden = true; return; }
+  const comCoords = CASAS.filter(c => Array.isArray(c.coords));
+  if (!comCoords.length) { $("#mapa").hidden = true; return; }
+  map = L.map("map", { scrollWheelZoom: false });
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 18, attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  }).addTo(map);
+  for (const c of comCoords){
+    const pop = el("div", "pop");
+    if (c.fotos[0]){ const im = new Image(); im.src = foto(c.fotos[0]); im.referrerPolicy = "no-referrer"; im.alt = ""; pop.append(im); }
+    pop.append(el("b", null, c.titulo), el("span", null, `${c.valor} · ${c.local}`));
+    const b = el("button", null, "Ver fotos e votar"); b.onclick = () => goCard(c.id); pop.append(b);
+    pins[c.id] = L.marker(c.coords, { icon: pinIcon(c, "") }).addTo(map).bindPopup(pop);
+  }
+  map.fitBounds(L.latLngBounds(comCoords.map(c => c.coords)), { padding: [40, 40] });
+}
+function pinIcon(c, cls){ return L.divIcon({ className: "", html: `<span class="pin ${cls}">${c.valor.replace("R$ ", "R$")}</span>`, iconSize: null }); }
+function updatePins(t, max, myVote){
+  if (!map) return;
+  for (const c of CASAS){
+    if (!pins[c.id]) continue;
+    const n = (t[c.id] || []).length;
+    const cls = [myVote === c.id ? "mine" : "", max > 0 && n === max ? "lead" : ""].join(" ");
+    pins[c.id].setIcon(pinIcon(c, cls));
+  }
+}
+function focusMap(id){
+  const c = CASAS.find(x => x.id === id); if (!c || !pins[id]) return;
+  $("#mapa").scrollIntoView({ behavior: "smooth", block: "center" });
+  map.setView(c.coords, 14); pins[id].openPopup();
+}
+function goCard(id){
+  const card = document.getElementById("casa-" + id); if (!card) return;
+  card.scrollIntoView({ behavior: "smooth", block: "center" });
+  card.classList.remove("flash"); void card.offsetWidth; card.classList.add("flash");
 }
 
 function askName(then){
@@ -217,6 +287,7 @@ async function vote(casa, btn){
   finally { btn.disabled = false; }
 }
 
+try { initMap(); } catch(e) { $("#mapa").hidden = true; }
 render();
 
 if (!firebaseConfig){
