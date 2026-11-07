@@ -163,7 +163,8 @@ function render(){
 
   const max = Math.max(0, ...CASAS.map(c => (t[c.id] || []).length));
   const leaders = CASAS.filter(c => max > 0 && (t[c.id] || []).length === max).length;
-  const sorted = [...CASAS].map((c, i) => ({c, i})).sort((a, b) => ((t[b.c.id]||[]).length - (t[a.c.id]||[]).length) || a.i - b.i).map(x => x.c);
+  const preco = c => { const n = parseInt(String(c.valor).replace(/\D/g, ""), 10); return isNaN(n) ? Infinity : n; };
+  const sorted = [...CASAS].sort((a, b) => preco(a) - preco(b));
 
   const grid = $("#grid"); grid.textContent = "";
   for (const c of sorted){
